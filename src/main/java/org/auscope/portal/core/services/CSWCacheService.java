@@ -108,7 +108,7 @@ public class CSWCacheService {
      */
     public CSWCacheService(Executor executor,
             HttpServiceCaller serviceCaller,
-            @SuppressWarnings("rawtypes") ArrayList cswServiceList) {
+            ArrayList<CSWServiceItem> cswServiceList) {
         this(executor, serviceCaller, cswServiceList, new CSWRecordTransformerFactory());
     }
 
@@ -124,7 +124,7 @@ public class CSWCacheService {
      */
     public CSWCacheService(Executor executor,
             HttpServiceCaller serviceCaller,
-            @SuppressWarnings("rawtypes") ArrayList cswServiceList,
+            ArrayList<CSWServiceItem> cswServiceList,
             CSWRecordTransformerFactory transformerFactory) {
         this.updateRunning = false;
         this.executor = executor;
@@ -597,16 +597,15 @@ public class CSWCacheService {
             }
         }
 
+        @SuppressWarnings("unchecked")
         @Override
         public void run() {
-
             // Before querying the endpoint, see if there is a serialised cache of endpoint
             // saved to disk, deserialise it and retain in memory in case there is a failure.
             Map<String, CSWRecord> serialisedCSWRecordMap = new HashMap<>();
             if(new File(FileIOUtil.getTempDirURL() + endpoint.getId() +".ser").exists()) {
                 Kryo kryo = new Kryo();
                 kryo.setRegistrationRequired(false);
-//                kryo.setInstantiatorStrategy(new Kryo.DefaultInstantiatorStrategy(new StdInstantiatorStrategy()));
                 kryo.setInstantiatorStrategy(new com.esotericsoftware.kryo.util.DefaultInstantiatorStrategy(new StdInstantiatorStrategy()));
                 com.esotericsoftware.kryo.io.Input input = null;
                 try {

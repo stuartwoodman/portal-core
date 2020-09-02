@@ -340,7 +340,7 @@ public class TestCSWCacheService extends PortalTestClass {
 			try {
 				input = new com.esotericsoftware.kryo.io.Input(
 						new FileInputStream(f1));
-				HashMap cswRecordMap = kryo.readObject(input, HashMap.class);
+                HashMap<?, ?> cswRecordMap = kryo.readObject(input, HashMap.class);
 				input.close();
 				Assert.assertEquals(30, cswRecordMap.size());
 			} catch (Exception e) {

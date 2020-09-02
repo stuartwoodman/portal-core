@@ -26,10 +26,11 @@ import org.auscope.portal.core.util.TextUtil;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.BasicSessionCredentials;
 import com.amazonaws.services.ec2.AmazonEC2;
-import com.amazonaws.services.ec2.AmazonEC2Client;
+import com.amazonaws.services.ec2.AmazonEC2ClientBuilder;
 import com.amazonaws.services.ec2.model.BlockDeviceMapping;
 import com.amazonaws.services.ec2.model.CreateTagsRequest;
 import com.amazonaws.services.ec2.model.DescribeImagesRequest;
@@ -45,7 +46,8 @@ import com.amazonaws.services.ec2.model.RunInstancesRequest;
 import com.amazonaws.services.ec2.model.RunInstancesResult;
 import com.amazonaws.services.ec2.model.Tag;
 import com.amazonaws.services.ec2.model.TerminateInstancesRequest;
-import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient;
+import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
+import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder;
 import com.amazonaws.services.securitytoken.model.AssumeRoleRequest;
 import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 
@@ -161,20 +163,18 @@ public class CloudComputeServiceAws extends CloudComputeService {
         if (!TextUtil.isNullOrEmpty(arn)) {
             if (TextUtil.isNullOrEmpty(clientSecret))
                 throw new PortalServiceException("Job ARN set, but no client secret");
-
-            AWSSecurityTokenServiceClient stsClient;
-
+            AWSSecurityTokenService stsClient;
             if (!TextUtil.isAnyNullOrEmpty(devAccessKey, devSecretKey)) {
-            	AWSCredentials awsCredentials;
-                
-                if(!TextUtil.isAnyNullOrEmpty(devSessionKey)) {
-                	awsCredentials = new BasicSessionCredentials(devAccessKey, devSecretKey, devSessionKey);                
+                AWSCredentials awsCredentials;
+                if (!TextUtil.isAnyNullOrEmpty(devSessionKey)) {
+                    awsCredentials = new BasicSessionCredentials(devAccessKey, devSecretKey, devSessionKey);
                 } else {
-                	awsCredentials = new BasicAWSCredentials(devAccessKey, devSecretKey);
+                    awsCredentials = new BasicAWSCredentials(devAccessKey, devSecretKey);
                 }
-                stsClient = new AWSSecurityTokenServiceClient(awsCredentials);
+                stsClient = AWSSecurityTokenServiceClientBuilder.standard()
+                        .withCredentials(new AWSStaticCredentialsProvider(awsCredentials)).build();
             } else {
-                stsClient = new AWSSecurityTokenServiceClient();
+                stsClient = AWSSecurityTokenServiceClientBuilder.defaultClient();
             }
 
             AssumeRoleRequest assumeRequest = new AssumeRoleRequest().withRoleArn(arn).withDurationSeconds(3600)
@@ -205,7 +205,7 @@ public class CloudComputeServiceAws extends CloudComputeService {
         String clientSecret = job.getProperty(CloudJob.PROPERTY_CLIENT_SECRET);
 
         AWSCredentials creds = getCredentials(arn, clientSecret);
-        AmazonEC2 ec2 = creds == null ? new AmazonEC2Client() : new AmazonEC2Client(creds);
+        AmazonEC2 ec2 = creds == null ? AmazonEC2ClientBuilder.defaultClient() : AmazonEC2ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(creds)).build();
 
         if (!TextUtil.isNullOrEmpty(getEndpoint()))
             ec2.setEndpoint(getEndpoint());

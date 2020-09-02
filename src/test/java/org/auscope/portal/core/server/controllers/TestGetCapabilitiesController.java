@@ -56,7 +56,8 @@ public class TestGetCapabilitiesController extends PortalTestClass {
             Assert.assertNotNull(is);
             ModelAndView mv = controller.getCustomLayers(serviceUrl,"Y");
             Assert.assertNotNull(mv);
-            List<String> ls = (List) mv.getModelMap().get("data");
+            @SuppressWarnings("unchecked")
+            List<String> ls = (List<String>) mv.getModelMap().get("data");
             Assert.assertEquals(21, ls.size());
         } finally {
             try {

@@ -114,8 +114,8 @@ public class TestCSWSearchController extends PortalTestClass {
         Assert.assertNotNull(mav.getModelMap().get("data"));
 
         ModelMap data = (ModelMap) mav.getModelMap().get("data");
-        Assert.assertEquals(1, ((Map) data.get("startIndexes")).get(serviceId[0]));
-        Assert.assertEquals(-1, ((Map) data.get("nextIndexes")).get(serviceId[0]));
+        Assert.assertEquals(1, ((Map<?, ?>) data.get("startIndexes")).get(serviceId[0]));
+        Assert.assertEquals(-1, ((Map<?, ?>) data.get("nextIndexes")).get(serviceId[0]));
 
         List<ModelMap> recs = (List<ModelMap>) data.get("records");
 

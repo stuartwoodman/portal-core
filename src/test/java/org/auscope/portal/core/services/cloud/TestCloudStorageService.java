@@ -162,6 +162,7 @@ public class TestCloudStorageService extends PortalTestClass {
         final MutableContentMetadata mockObj1ContentMetadata = context.mock(MutableContentMetadata.class, "mockObj1Md");
         final MutableContentMetadata mockObj2ContentMetadata = context.mock(MutableContentMetadata.class, "mockObj2Md");
         final MutableContentMetadata mockObj3ContentMetadata = context.mock(MutableContentMetadata.class, "mockObj3Md");
+        @SuppressWarnings("unchecked")
         final PageSet<? extends StorageMetadata> mockPageSet = context.mock(PageSet.class);
 
         LinkedList<MutableBlobMetadataImpl> ls = new LinkedList<>();

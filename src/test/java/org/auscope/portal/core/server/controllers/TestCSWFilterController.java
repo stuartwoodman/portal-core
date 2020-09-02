@@ -120,6 +120,7 @@ public class TestCSWFilterController extends PortalTestClass {
         ModelAndView mav = controller.getFilteredCSWRecords(key, value, maxRecords, startPosition, customRegistry);
         Assert.assertNotNull(mav);
         Assert.assertTrue((Boolean) mav.getModel().get("success"));
+        @SuppressWarnings("unchecked")
         Collection<ModelMap> dataRecs = (Collection<ModelMap>) mav.getModel().get("data");
         Assert.assertNotNull(dataRecs);
         Assert.assertTrue(dataRecs.contains(mockViewRec1));
@@ -239,6 +240,7 @@ public class TestCSWFilterController extends PortalTestClass {
         ModelAndView mav = controller.getFilteredCSWRecords(key, value, maxRecords, startPosition, customRegistry);
         Assert.assertNotNull(mav);
         Assert.assertTrue((Boolean) mav.getModel().get("success"));
+        @SuppressWarnings("unchecked")
         Collection<ModelMap> dataRecs = (Collection<ModelMap>) mav.getModel().get("data");
         Assert.assertNotNull(dataRecs);
         Assert.assertTrue(dataRecs.contains(mockViewRec1));
@@ -494,6 +496,7 @@ public class TestCSWFilterController extends PortalTestClass {
         Assert.assertNotNull(mav);
         Assert.assertTrue((Boolean) mav.getModel().get("success"));
 
+        @SuppressWarnings("unchecked")
         List<ModelMap> actual = (List<ModelMap>) mav.getModel().get("data");
         Assert.assertNotNull(actual);
 
@@ -551,6 +554,7 @@ public class TestCSWFilterController extends PortalTestClass {
         ModelAndView mav = controller.getFilteredCSWKeywords(cswServiceIds, "");
         Assert.assertNotNull(mav);
         Assert.assertTrue((Boolean) mav.getModel().get("success"));
+        @SuppressWarnings("unchecked")
         List<ModelMap> actual = (List<ModelMap>) mav.getModel().get("data");
         Assert.assertNotNull(actual);
         Assert.assertEquals(3, actual.size());

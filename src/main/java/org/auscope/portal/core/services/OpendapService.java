@@ -13,6 +13,7 @@ import org.auscope.portal.core.services.responses.opendap.AbstractViewVariable;
 import org.auscope.portal.core.services.responses.opendap.ViewVariableFactory;
 
 import ucar.nc2.dataset.NetcdfDataset;
+import ucar.nc2.dataset.NetcdfDatasets;
 
 /**
  * Service class for interacting with an OPeNDAP endpoint
@@ -44,7 +45,7 @@ public class OpendapService {
      */
     protected NetcdfDataset fetchDataset(String serviceUrl) throws PortalServiceException {
         try {
-            return NetcdfDataset.openDataset(serviceUrl);
+            return NetcdfDatasets.openDataset(serviceUrl);
         } catch (IOException ex) {
             log.info(String.format("Error connecting to '%1$s'", serviceUrl));
             log.debug("Exception...", ex);

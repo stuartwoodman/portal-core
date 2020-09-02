@@ -59,7 +59,7 @@ public class CSWFilterService {
      */
     public CSWFilterService(Executor executor,
             HttpServiceCaller serviceCaller,
-            @SuppressWarnings("rawtypes") ArrayList cswServiceList) {
+            ArrayList<CSWServiceItem> cswServiceList) {
         this(executor, serviceCaller, cswServiceList, new CSWRecordTransformerFactory());
     }
 
@@ -75,7 +75,7 @@ public class CSWFilterService {
      */
     public CSWFilterService(Executor executor,
             HttpServiceCaller serviceCaller,
-            @SuppressWarnings("rawtypes") ArrayList cswServiceList,
+            ArrayList<CSWServiceItem> cswServiceList,
             CSWRecordTransformerFactory transformerFactory) {
         this.executor = executor;
         this.serviceCaller = serviceCaller;

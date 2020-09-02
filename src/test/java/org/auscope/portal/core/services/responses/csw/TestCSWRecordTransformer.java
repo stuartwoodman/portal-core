@@ -268,6 +268,7 @@ public class TestCSWRecordTransformer extends PortalTestClass {
      * @param node
      * @return
      */
+    @SuppressWarnings("unused")
     private static String debugLocation(final Node node) {
         final Stack<String> stack = new Stack<>();
 
@@ -286,6 +287,7 @@ public class TestCSWRecordTransformer extends PortalTestClass {
         return result;
     }
 
+    @SuppressWarnings("unused")
     private static List<Node> getNonTextChildNodes(final Node node) {
         final List<Node> nonTextChildren = new ArrayList<>();
 

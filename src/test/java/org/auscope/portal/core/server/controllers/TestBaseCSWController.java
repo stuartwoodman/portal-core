@@ -111,6 +111,7 @@ public class TestBaseCSWController extends PortalTestClass {
         }});
 
         ModelAndView mav = baseController.generateKnownLayerResponse(knownLayers, mockStackDriverService);
+        @SuppressWarnings("unchecked")
         List<ModelMap> data = (List<ModelMap>) mav.getModelMap().get("data");
         Assert.assertEquals(4, data.size());
 
@@ -118,6 +119,7 @@ public class TestBaseCSWController extends PortalTestClass {
         Assert.assertFalse(data.get(0).containsKey("stackdriverFailingHosts"));
         //servGroup2
         Assert.assertTrue(data.get(1).containsKey("stackdriverFailingHosts"));
+        @SuppressWarnings("unchecked")
         List<String> failingHosts = (List<String>) data.get(1).get("stackdriverFailingHosts");
         Assert.assertEquals(3, failingHosts.size());
         Assert.assertEquals("host.name.2", failingHosts.get(0));

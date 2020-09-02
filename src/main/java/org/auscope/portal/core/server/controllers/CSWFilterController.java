@@ -42,13 +42,13 @@ public class CSWFilterController extends BaseCSWController {
     public static final int DEFAULT_MAX_RECORDS = 100;
     private static final char SINGLE_CHAR_WILDCARD = '#';
     private CSWFilterService cswFilterService;
-    protected static ConcurrentHashMap<String, Set> catalogueKeywordCache;
+    protected static ConcurrentHashMap<String, Set<String>> catalogueKeywordCache;
 
     @Resource(name="conversionService")
     private ConversionService converter;
 
     static {
-        catalogueKeywordCache = new ConcurrentHashMap<String, Set>();
+        catalogueKeywordCache = new ConcurrentHashMap<String, Set<String>>();
     }
 
     /**

@@ -63,7 +63,6 @@ public class WMSService {
             throws PortalServiceException {
         HttpRequestBase method = null;
         try {
-
             WMSMethodMakerInterface methodMaker = getSupportedMethodMaker(serviceUrl, version);
             // Do the request
             method = methodMaker.getCapabilitiesMethod(serviceUrl);

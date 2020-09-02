@@ -372,8 +372,7 @@ public class CloudComputeServiceNectar extends CloudComputeService {
             
             //JClouds has no support (currently) for tailing server console output. Our current workaround
             //is to offload this to openstack4j.
-            @SuppressWarnings("rawtypes")
-			OSClient os = null;
+			OSClient<?> os = null;
             if(endpoint.contains("keystone") && endpoint.contains("v3")) {
             	os = OSFactory.builderV3()
 	            		.endpoint(endpoint)
