@@ -3,6 +3,7 @@ package org.auscope.portal.core.view.knownlayer;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.io.Serializable;
+import java.util.Arrays;
 
 import org.auscope.portal.core.uifilter.FilterCollection;
 
@@ -84,6 +85,10 @@ public class KnownLayer implements Serializable {
 
     /** If specified, the service group to match the check_id in Google Monitoring uptime checks */
 	private String stackdriverServiceGroup;
+	
+	/** Keywords, used primarily to display bespoke widgets for layers */
+	private String[] keywords;
+	
     /**
      * Creates a new KnownLayer
      *
@@ -401,6 +406,14 @@ public class KnownLayer implements Serializable {
     public String getStackdriverServiceGroup() {
     	return this.stackdriverServiceGroup;
     }
+    
+    public void setKeywords(String[] keywords) {
+        this.keywords = keywords;
+    }
+    
+    public String[] getKeywords() {
+        return this.keywords;
+    }
 
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
@@ -412,7 +425,8 @@ public class KnownLayer implements Serializable {
                 + ", proxyStyleUrl=" + proxyStyleUrl + ", proxyDownloadUrl=" + proxyDownloadUrl
                 + ", knownLayerSelector=" + knownLayerSelector + ", iconUrl=" + iconUrl + ", polygonColor="
                 + polygonColor + ", iconAnchor=" + iconAnchor + ", iconSize=" + iconSize + ", styles=" + mapStyles +", feature_count="
-                + feature_count + ", order=" + order + ", singleTile=" + singleTile + ", staticLegendUrl=" + staticLegendUrl + "]";
+                + feature_count + ", order=" + order + ", singleTile=" + singleTile + ", staticLegendUrl=" + staticLegendUrl
+                + ", keywords=" + Arrays.toString(keywords) + "]";
     }
 
     public FilterCollection getFilterCollection() {

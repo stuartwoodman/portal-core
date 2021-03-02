@@ -2,7 +2,11 @@ package org.auscope.portal.core.view;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
+import org.auscope.portal.core.services.responses.csw.CSWRecord;
 import org.auscope.portal.core.view.knownlayer.KnownLayer;
 import org.auscope.portal.core.view.knownlayer.KnownLayerSelector;
 import org.auscope.portal.core.view.knownlayer.SelectorsMode;
@@ -78,6 +82,15 @@ public class ViewKnownLayerFactory {
         if (k.getStackdriverServiceGroup() != null) {
             obj.put("stackdriverServiceGroup", k.getStackdriverServiceGroup());
         }
+        
+        if (k.getKeywords() != null) {
+            List<String> keywords = new ArrayList<String>();
+            for (String keyword : k.getKeywords()) {
+                keywords.add(keyword);
+            }
+            obj.put("keywords", keywords);
+        }
+        
 
         return obj;
     }
