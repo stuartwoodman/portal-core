@@ -3,7 +3,6 @@ package org.auscope.portal.core.view.knownlayer;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import org.auscope.portal.core.uifilter.FilterCollection;
 import org.json.JSONArray;
@@ -34,9 +33,6 @@ public class KnownLayer implements Serializable {
 
     /** The hidden layer flag. */
     private boolean hidden;
-
-    /** The layers group. */
-    private String group;
 
     /** URL to proxy data requests through */
     private String proxyUrl;
@@ -81,9 +77,6 @@ public class KnownLayer implements Serializable {
     private String mapStyles;
 
     private int feature_count;
-
-    /** Set an order - defaults to name */
-    private String order;
 
     /**
      * Whether the layer should be requested as a single tile or many tiles (many is
@@ -201,26 +194,6 @@ public class KnownLayer implements Serializable {
      */
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
-    }
-
-    /**
-     * Gets the group for this known layer. Layers will be organised according to
-     * their group names.
-     *
-     * @return the group
-     */
-    public String getGroup() {
-        return group;
-    }
-
-    /**
-     * Sets the group for this known layer. Layers will be organised according to
-     * their group names.
-     *
-     * @param group the new group
-     */
-    public void setGroup(String group) {
-        this.group = group;
     }
 
     /**
@@ -403,14 +376,6 @@ public class KnownLayer implements Serializable {
         this.feature_count = feature_count;
     }
 
-    public String getOrder() {
-        return order;
-    }
-
-    public void setOrder(String order) {
-        this.order = (order == null) ? "" : order;
-    }
-
     public Boolean getSingleTile() {
         return singleTile;
     }
@@ -460,11 +425,11 @@ public class KnownLayer implements Serializable {
     @Override
     public String toString() {
         return "KnownLayer [name=" + name + ", id=" + id + ", description=" + description + ", hidden=" + hidden
-                + ", group=" + group + ", proxyUrl=" + proxyUrl + ", proxyCountUrl=" + proxyCountUrl
+        		+ ", proxyUrl=" + proxyUrl + ", proxyCountUrl=" + proxyCountUrl
                 + ", proxyStyleUrl=" + proxyStyleUrl + ", proxyDownloadUrl=" + proxyDownloadUrl
                 + ", knownLayerSelector=" + knownLayerSelector + ", iconUrl=" + iconUrl + ", polygonColor="
                 + polygonColor + ", iconAnchor=" + iconAnchor + ", iconSize=" + iconSize + ", styles=" + mapStyles
-                + ", feature_count=" + feature_count + ", order=" + order + ", singleTile=" + singleTile
+                + ", feature_count=" + feature_count + ", singleTile=" + singleTile
                 + ", legendImg=" + legendImg + ", supportsCsvDownloads=" + supportsCsvDownloads
                 + (getServerType() != null ? ", serverType=" + getServerType() : "") + ']';
     }

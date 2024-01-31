@@ -149,7 +149,6 @@ public class SearchService {
 		
 		// Layer info
 		document.add(new Field("id", layerAndRecords.getKnownLayer().getId(), TextField.TYPE_STORED));
-		document.add(new Field("group", layerAndRecords.getKnownLayer().getGroup(), TextField.TYPE_STORED));
 		document.add(new Field("name", layerAndRecords.getKnownLayer().getName(), TextField.TYPE_STORED));
 		document.add(new Field("description", layerAndRecords.getKnownLayer().getDescription(), TextField.TYPE_STORED));
 		
