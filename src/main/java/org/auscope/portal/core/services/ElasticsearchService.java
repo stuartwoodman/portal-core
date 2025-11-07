@@ -486,12 +486,22 @@ public class ElasticsearchService {
 		}
 
 		// Combine Criteria
-		Criteria cswRecordCriteria = cswSearchCriteria;
-		if (ogcServicesCriteria != null) {
-			cswRecordCriteria = Criteria.and().subCriteria(cswSearchCriteria).subCriteria(ogcServicesCriteria);
+		Criteria cswRecordCriteria = null;
+
+		if (cswSearchCriteria != null && ogcServicesCriteria != null) {
+		    cswRecordCriteria = Criteria.and().subCriteria(cswSearchCriteria).subCriteria(ogcServicesCriteria);
+		} else if (cswSearchCriteria != null) {
+		    cswRecordCriteria = cswSearchCriteria;
+		} else if (ogcServicesCriteria != null) {
+		    cswRecordCriteria = ogcServicesCriteria;
 		}
+
 		if (spatialCriteria != null) {
-			cswRecordCriteria = cswRecordCriteria.and(spatialCriteria);
+		    if (cswRecordCriteria != null) {
+		        cswRecordCriteria = cswRecordCriteria.and(spatialCriteria);
+		    } else {
+		        cswRecordCriteria = spatialCriteria;
+		    }
 		}
 
 		// Search
