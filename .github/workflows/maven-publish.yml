@@ -54,6 +54,6 @@ jobs:
 
       # ✅ Deploy to GitHub Packages
       - name: Publish to GitHub Packages
-        run: mvn --batch-mode clena deploy -Pgithub -Dgpg.skip=false
+        run: mvn --batch-mode clean deploy -Pgithub -Dgpg.skip=false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
